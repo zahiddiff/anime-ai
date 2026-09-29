@@ -1,0 +1,8 @@
+{
+ "prompt": "2",
+ "negative": "3",
+ "sampler": "5",
+ "latent": "4",
+ "save": "7",
+ "load_image": "10"
+}

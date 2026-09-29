@@ -1,0 +1,35 @@
+# --- Heavy installs (re-created by the setup steps in README) ---
+comfyui/
+trainers/
+_downloads/
+
+# --- Models & weights ---
+*.safetensors
+*.ckpt
+*.pth
+*.gguf
+*.onnx
+
+# --- Generated working files ---
+project/_comfy_output/
+project/clips/
+project/keyframes/
+project/audio/
+project/edit/
+project/characters/*/candidates/
+project/characters/*/rejected/
+project/characters/*/dataset/
+project/characters/*/lora/
+project/characters/*/logs/
+project/characters/*/candidates_sheet.jpg
+
+# --- Private notes (public, sanitised version lives in docs/) ---
+SETUP_LOG.md
+
+# --- Python / OS ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+Thumbs.db
+desktop.ini

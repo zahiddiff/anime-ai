@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AnimeAI — Product Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0e13; --ink2:#161822; --line:#262a38; --paper:#f6f5f2; --text:#1b1d24; --muted:#5c6170;
+    --pink:#ff5fa2; --teal:#2fc4bd; --gold:#f0b429; --violet:#8b7cf6; --green:#39b36b;
+  }
+  @page{ size:A4; margin:0 }
+  *{ box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact }
+  html,body{ margin:0; padding:0; background:#fff }
+  body{ font-family:Inter,system-ui,sans-serif; color:var(--text); font-size:10.5pt; line-height:1.5 }
+  .page{ width:210mm; height:297mm; position:relative; overflow:hidden; page-break-after:always; background:var(--paper); padding:18mm 17mm 16mm }
+  .page:last-child{ page-break-after:auto }
+  h1,h2,h3{ font-family:"Chakra Petch",sans-serif; margin:0; letter-spacing:.2px }
+  h2{ font-size:22pt; line-height:1.15; margin-bottom:4mm }
+  h3{ font-size:12pt; margin-bottom:1.5mm }
+  p{ margin:0 0 3mm }
+  .kicker{ font-family:"JetBrains Mono",monospace; font-size:8pt; letter-spacing:2px; text-transform:uppercase; color:var(--pink); margin-bottom:2mm; font-weight:600 }
+  .lead{ font-size:12pt; color:#333745; max-width:160mm }
+  .muted{ color:var(--muted) }
+  .foot{ position:absolute; left:17mm; right:17mm; bottom:9mm; display:flex; justify-content:space-between; font-family:"JetBrains Mono",monospace; font-size:7.5pt; color:#8a8f9c; border-top:1px solid #dcdad4; padding-top:2.5mm }
+  img{ display:block; max-width:100% }
+  .fig{ border-radius:3mm; overflow:hidden; box-shadow:0 1.5mm 5mm rgba(0,0,0,.12) }
+  .cap{ font-size:8.5pt; color:var(--muted); margin-top:2mm }
+
+  /* cover */
+  .cover{ background:var(--ink); color:#eef0f6; padding:0 }
+  .cover .art{ height:128mm; background:url(../images/banner.jpg) center/cover; position:relative }
+  .cover .art::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(13,14,19,0) 45%,rgba(13,14,19,1) 100%) }
+  .cover .body{ padding:6mm 17mm 0 }
+  .cover h1{ font-size:54pt; line-height:1; letter-spacing:1px }
+  .cover h1 span{ color:var(--pink) }
+  .cover .sub{ font-size:15pt; color:#c9ccd8; margin:5mm 0 9mm; max-width:150mm; line-height:1.4 }
+  .pills{ display:flex; flex-wrap:wrap; gap:2.5mm }
+  .pill{ font-family:"JetBrains Mono",monospace; font-size:8pt; padding:1.6mm 3.2mm; border:1px solid #343a4d; border-radius:10mm; color:#d7dae4 }
+  .pill b{ color:var(--teal) }
+  .cover .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:4mm; margin-top:14mm }
+  .stat{ border-left:2px solid var(--pink); padding-left:3.5mm }
+  .stat .n{ font-family:"Chakra Petch"; font-size:21pt; font-weight:700; color:#fff; line-height:1.1 }
+  .stat .l{ font-size:8pt; color:#9aa0b2; margin-top:1mm }
+  .cover .foot{ border-top-color:#262a38; color:#6f7587 }
+
+  /* grids & cards */
+  .g2{ display:grid; grid-template-columns:1fr 1fr; gap:6mm }
+  .g3{ display:grid; grid-template-columns:repeat(3,1fr); gap:4.5mm }
+  .card{ background:#fff; border:1px solid #e4e2dc; border-radius:3mm; padding:4.5mm 4.5mm 3.5mm }
+  .card .ico{ width:8mm; height:8mm; border-radius:2mm; display:grid; place-items:center; font-family:"Chakra Petch"; font-weight:700; color:#fff; margin-bottom:2.5mm; font-size:10pt }
+  .card p{ font-size:9.2pt; color:#454a57; margin:0 }
+  .tag{ display:inline-block; font-family:"JetBrains Mono",monospace; font-size:7pt; padding:.6mm 2mm; border-radius:1mm; margin-top:2.5mm; font-weight:600 }
+  .ok{ background:#e3f5ea; color:#1f7a45 } .next{ background:#fff3d6; color:#8a6200 } .plan{ background:#ecebf8; color:#4e45a8 }
+
+  .problem{ display:grid; grid-template-columns:1fr 1fr; gap:6mm; margin:6mm 0 7mm }
+  .problem > div{ border-radius:3mm; padding:5mm }
+  .problem .bad{ background:#fdecef } .problem .good{ background:#e6f7f5 }
+  .problem h3{ font-size:11pt }
+  .problem ul{ margin:1.5mm 0 0; padding-left:4.5mm; font-size:9.3pt; color:#3d414d }
+  .problem li{ margin-bottom:1mm }
+
+  /* pipeline */
+  .pipe{ display:flex; flex-direction:column; gap:3mm; margin-top:4mm }
+  .step{ display:grid; grid-template-columns:13mm 1fr 30mm; align-items:center; gap:4mm; background:#fff; border:1px solid #e4e2dc; border-radius:3mm; padding:3.5mm 4.5mm }
+  .step .num{ font-family:"Chakra Petch"; font-weight:700; font-size:17pt; color:#c3c1ba }
+  .step h3{ font-size:11pt; margin:0 0 .6mm }
+  .step p{ font-size:9pt; color:#4a4f5c; margin:0 }
+  .step .tool{ font-family:"JetBrains Mono",monospace; font-size:7.5pt; color:var(--muted); text-align:right }
+  .step.done{ border-left:3px solid var(--green) } .step.nx{ border-left:3px solid var(--gold) } .step.pl{ border-left:3px solid var(--violet) }
+  .legend{ display:flex; gap:6mm; font-size:8pt; color:var(--muted); margin-top:3mm }
+  .legend i{ display:inline-block; width:3mm; height:3mm; border-radius:.6mm; margin-right:1.5mm; vertical-align:-.3mm }
+
+  table{ width:100%; border-collapse:collapse; font-size:9pt }
+  th{ text-align:left; font-family:"JetBrains Mono",monospace; font-size:7.5pt; letter-spacing:1px; text-transform:uppercase; color:var(--muted); border-bottom:1.5px solid #cfccc4; padding:2mm 2mm }
+  td{ padding:2.2mm 2mm; border-bottom:1px solid #e4e2dc; vertical-align:top }
+  td b{ font-weight:600 }
+  .big{ font-family:"Chakra Petch"; font-weight:700; font-size:11pt }
+
+  .callout{ background:var(--ink); color:#e8eaf2; border-radius:3mm; padding:5mm 6mm; margin-top:6mm }
+  .callout h3{ color:#fff } .callout p{ color:#b9bdcb; font-size:9.3pt; margin:0 }
+  .callout .kicker{ color:var(--gold) }
+  .bars{ margin-top:3.5mm; display:grid; gap:2.2mm }
+  .bar{ display:grid; grid-template-columns:36mm 1fr 17mm; align-items:center; gap:3mm; font-size:8.5pt }
+  .bar .track{ height:4mm; background:#262a38; border-radius:1mm; overflow:hidden }
+  .bar .fill{ height:100% }
+  .bar .v{ font-family:"JetBrains Mono",monospace; text-align:right }
+
+  .road{ display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; margin-top:3mm }
+  .road .col{ background:#fff; border:1px solid #e4e2dc; border-radius:3mm; padding:4mm }
+  .road ul{ margin:1.5mm 0 0; padding-left:4mm; font-size:9pt; color:#454a57 }
+  .road li{ margin-bottom:1.2mm }
+
+  .end{ background:var(--ink); color:#e8eaf2 }
+  .end h2{ color:#fff; font-size:30pt }
+  .end .strip{ height:70mm; margin:-18mm -17mm 12mm; background:url(../images/card.jpg) center/cover; position:relative }
+  .end .strip::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(13,14,19,0) 30%,rgba(13,14,19,1) 100%) }
+  .end p{ color:#b9bdcb }
+  .contact{ margin-top:9mm; display:grid; gap:3mm; font-family:"JetBrains Mono",monospace; font-size:9.5pt }
+  .contact span{ color:var(--teal); display:inline-block; width:26mm }
+  .end .foot{ border-top-color:#262a38; color:#6f7587 }
+</style>
+</head>
+<body>
+
+<!-- 1 · COVER -->
+<section class="page cover">
+  <div class="art"></div>
+  <div class="body">
+    <div class="kicker">Product overview · 2026</div>
+    <h1>Anime<span>AI</span></h1>
+    <p class="sub">A local AI anime studio. Original characters, consistent in every shot, designed and animated fully offline on an 8&nbsp;GB gaming laptop.</p>
+    <div class="pills">
+      <span class="pill"><b>●</b> 100% offline</span>
+      <span class="pill"><b>●</b> RTX 4060 Laptop · 8 GB</span>
+      <span class="pill"><b>●</b> Open-source models</span>
+      <span class="pill"><b>●</b> Scriptable pipeline</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">18 s</div><div class="l">per anime keyframe</div></div>
+      <div class="stat"><div class="n">46 min</div><div class="l">to teach a new character</div></div>
+      <div class="stat"><div class="n">5.8 GB</div><div class="l">peak VRAM in training</div></div>
+      <div class="stat"><div class="n">$0</div><div class="l">per image, forever</div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Md Zahidul Haque</span><span>github.com/zahiddiff/anime-ai</span></div>
+</section>
+
+<!-- 2 · OVERVIEW -->
+<section class="page">
+  <div class="kicker">01 · Overview</div>
+  <h2>From a story idea to anime scenes, on one laptop</h2>
+  <p class="lead">AnimeAI chains open-source image, video, language and audio models into one production pipeline for 2D Japanese-style anime in a modern shōnen action look: bold lineart, cel shading, dramatic lighting, dynamic camera.</p>
+
+  <div class="problem">
+    <div class="bad">
+      <h3>The problem</h3>
+      <ul>
+        <li>Cloud generators charge per image or clip and keep your work on their servers.</li>
+        <li>Generic models draw a <b>different person every time</b>, so a character can't carry a story.</li>
+        <li>Most local guides assume a 24 GB desktop GPU.</li>
+      </ul>
+    </div>
+    <div class="good">
+      <h3>The approach</h3>
+      <ul>
+        <li>Everything runs locally: no accounts, no fees, no upload.</li>
+        <li>Each main character gets a small trained add-on (LoRA) that <b>locks in their look</b>.</li>
+        <li>Every step is tuned and benchmarked for an 8 GB laptop GPU.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="ico" style="background:var(--pink)">01</div><h3>Character design</h3><p>Original characters, turnaround sheets and background plates from text.</p><span class="tag ok">WORKING</span></div>
+    <div class="card"><div class="ico" style="background:var(--teal)">02</div><h3>Consistency</h3><p>Train a character once in ~46 min; one trigger word brings them back in any scene.</p><span class="tag ok">WORKING</span></div>
+    <div class="card"><div class="ico" style="background:var(--gold)">03</div><h3>Pose control</h3><p>Copy the exact pose of any reference drawing onto any character.</p><span class="tag ok">WORKING</span></div>
+    <div class="card"><div class="ico" style="background:#6b7a99">04</div><h3>Refine &amp; upscale</h3><p>Anime-specific 4× upscaling plus a detail pass for clean final keyframes.</p><span class="tag ok">WORKING</span></div>
+    <div class="card"><div class="ico" style="background:var(--violet)">05</div><h3>Animation</h3><p>Keyframes become 2–5 s clips, then are interpolated and upscaled.</p><span class="tag next">NEXT</span></div>
+    <div class="card"><div class="ico" style="background:#3a3f52">06</div><h3>Story, voice, edit</h3><p>Local LLM storyboards, voices, music, SFX and an automatic rough cut.</p><span class="tag plan">PLANNED</span></div>
+  </div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>2</span></div>
+</section>
+
+<!-- 3 · PIPELINE -->
+<section class="page">
+  <div class="kicker">02 · How it works</div>
+  <h2>One pipeline, eight stages</h2>
+  <p class="lead">Every stage is driven through ComfyUI's HTTP API by small Python scripts. Workflows are generated in code and stored as JSON, so a batch job can fill in prompts, seeds and sizes and render hundreds of shots unattended.</p>
+  <div class="pipe">
+    <div class="step pl"><div class="num">01</div><div><h3>Story → shot list</h3><p>A local language model turns a premise into a short script and a machine-readable shot list: camera, action, dialogue, prompts.</p></div><div class="tool">Ollama · Qwen / Gemma</div></div>
+    <div class="step done"><div class="num">02</div><div><h3>Character design</h3><p>Concepts, turnaround sheets and backgrounds from the NoobAI-XL anime model.</p></div><div class="tool">NoobAI-XL v1.1</div></div>
+    <div class="step done"><div class="num">03</div><div><h3>Character training</h3><p>Generate 48 varied images → curate → auto-caption → train an 8 GB-safe LoRA.</p></div><div class="tool">kohya sd-scripts · WD14</div></div>
+    <div class="step done"><div class="num">04</div><div><h3>Keyframes</h3><p>Character LoRA + ControlNet pose for each shot's key moment.</p></div><div class="tool">ControlNet Union ProMax</div></div>
+    <div class="step done"><div class="num">05</div><div><h3>Refine &amp; upscale</h3><p>4× anime upscaler, then a low-denoise pass for crisp lines.</p></div><div class="tool">AnimeSharp · RealESRGAN</div></div>
+    <div class="step nx"><div class="num">06</div><div><h3>Image → video</h3><p>Animate keyframes into short clips; first + last frame control for action beats.</p></div><div class="tool">Wan 2.2 (5B / 14B GGUF)</div></div>
+    <div class="step pl"><div class="num">07</div><div><h3>Voice, music, SFX</h3><p>Local text-to-speech, music generation and video-to-audio effects.</p></div><div class="tool">GPT-SoVITS · ACE-Step</div></div>
+    <div class="step pl"><div class="num">08</div><div><h3>Assemble</h3><p>RIFE interpolation, then an ffmpeg rough cut exported for DaVinci Resolve.</p></div><div class="tool">RIFE · ffmpeg</div></div>
+  </div>
+  <div class="legend"><span><i style="background:var(--green)"></i>Working</span><span><i style="background:var(--gold)"></i>Next</span><span><i style="background:var(--violet)"></i>Planned</span></div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>3</span></div>
+</section>
+
+<!-- 4 · CONSISTENCY -->
+<section class="page">
+  <div class="kicker">03 · Character consistency</div>
+  <h2>Same character, every scene</h2>
+  <p class="lead">A base model draws a new person each time. After 46 minutes of training on 37 curated images, the trigger word <b>sumi_ink</b> brings back the same character in scenes she was never trained on, while her clothes still follow the prompt.</p>
+  <div class="fig"><img src="../images/lora_grid.jpg" alt=""></div>
+  <p class="cap">Rows: café · neon-city run · casual park · rainy sword fight. Columns: no LoRA → training epochs 2, 4, 6, 8 → final. The prompts never mention hair or eye colour.</p>
+  <div class="g3" style="margin-top:3mm">
+    <div class="card"><h3>Without LoRA</h3><p>Four different people: blonde, black-haired, brunette.</p></div>
+    <div class="card"><h3>Epochs 2–6</h3><p>Learning, but unstable; hair drifts to red or black in dark scenes.</p></div>
+    <div class="card"><h3>Epoch 8 → final</h3><p>Pink bob, blunt bangs, green eyes, reliably, in all four scenes.</p></div>
+  </div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>4</span></div>
+</section>
+
+<!-- 5 · GALLERY -->
+<section class="page">
+  <div class="kicker">04 · Design tools</div>
+  <h2>Concepts, poses, sheets, backgrounds</h2>
+  <div class="fig"><img src="../images/concepts.jpg" alt=""></div>
+  <p class="cap">Three original characters designed from text: storm courier, ink swordswoman, gravity mechanic.</p>
+  <div class="g2" style="margin-top:4mm">
+    <div><div class="fig"><img src="../images/pose_control.jpg" alt=""></div><p class="cap">Pose control: reference → extracted skeleton → a different character in the same pose.</p></div>
+    <div><div class="fig"><img src="../images/refine_upscale.jpg" alt=""></div><p class="cap">Refine + upscale: 832×1216 → 1248×1824 with cleaner lines.</p></div>
+  </div>
+  <div class="g2" style="margin-top:3mm">
+    <div><div class="fig"><img src="../images/turnaround.jpg" alt=""></div><p class="cap">Turnaround reference sheet.</p></div>
+    <div><div class="fig"><img src="../images/background.jpg" alt=""></div><p class="cap">Background plate, no characters.</p></div>
+  </div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>5</span></div>
+</section>
+
+<!-- 6 · PERFORMANCE -->
+<section class="page">
+  <div class="kicker">05 · Performance</div>
+  <h2>Built for an 8 GB laptop</h2>
+  <p class="lead">Measured on an Acer Nitro V 16: RTX 4060 Laptop (8 GB), Core i5-14450HX, 16 GB single-channel DDR5.</p>
+  <table>
+    <tr><th>Task</th><th>Output</th><th>Time</th><th>Peak VRAM</th></tr>
+    <tr><td><b>Anime keyframe</b></td><td>832×1216, 28 steps</td><td class="big">18 s</td><td>7.5 GB</td></tr>
+    <tr><td><b>Pose-controlled keyframe</b></td><td>OpenPose + ControlNet</td><td class="big">51 s</td><td>7.3 GB</td></tr>
+    <tr><td><b>Refine + 4× upscale</b></td><td>→ 1248×1824</td><td class="big">55 s</td><td>7.7 GB</td></tr>
+    <tr><td><b>Character LoRA training</b></td><td>1,480 steps, rank 16</td><td class="big">46 min</td><td>5.8 GB</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="kicker">Tuning finding</div>
+    <h3>The laptop was throttling itself</h3>
+    <p>The vendor's quiet fan profile capped the GPU at 1.2 GHz and ~20 W at only 58 °C. Switching to the Turbo profile raised it to 2.4 GHz and up to 91 W.</p>
+    <div class="bars">
+      <div class="bar"><span>Keyframe, default</span><div class="track"><div class="fill" style="width:100%;background:#5a6078"></div></div><span class="v">33.7 s</span></div>
+      <div class="bar"><span>+ fp16 accumulation</span><div class="track"><div class="fill" style="width:85.8%;background:#8a8fa8"></div></div><span class="v">28.9 s</span></div>
+      <div class="bar"><span>+ Turbo profile</span><div class="track"><div class="fill" style="width:54.6%;background:var(--teal)"></div></div><span class="v">18.4 s</span></div>
+      <div class="bar"><span>Training, quiet</span><div class="track"><div class="fill" style="width:100%;background:#5a6078"></div></div><span class="v">5.0 s/it</span></div>
+      <div class="bar"><span>Training, Turbo</span><div class="track"><div class="fill" style="width:36.8%;background:var(--pink)"></div></div><span class="v">1.84 s/it</span></div>
+    </div>
+  </div>
+
+  <div class="g2" style="margin-top:6mm">
+    <div class="card"><h3>What fits in 8 GB</h3><p>fp8 base weights, UNet-only LoRA training, cached latents and text-encoder outputs, tiled VAE decode, dynamic VRAM loading.</p></div>
+    <div class="card"><h3>What doesn't</h3><p><code>--highvram</code> with ControlNet exceeds 8 GB and spills into shared memory: 225 s per step instead of ~1 s. Avoided.</p></div>
+  </div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>6</span></div>
+</section>
+
+<!-- 7 · STACK & ROADMAP -->
+<section class="page">
+  <div class="kicker">06 · Technology</div>
+  <h2>Open-source stack</h2>
+  <table>
+    <tr><th>Layer</th><th>Tool</th><th>Licence</th></tr>
+    <tr><td><b>Engine</b></td><td>ComfyUI v0.37 portable · PyTorch 2.13 · CUDA 13</td><td>GPL-3.0</td></tr>
+    <tr><td><b>Anime model</b></td><td>NoobAI-XL v1.1 (SDXL / Illustrious family)</td><td>FAIPL-1.0-SD</td></tr>
+    <tr><td><b>Pose / structure</b></td><td>xinsir ControlNet Union ProMax · OpenPose</td><td>Apache-2.0</td></tr>
+    <tr><td><b>Upscaling</b></td><td>4x-AnimeSharp · RealESRGAN x4plus anime</td><td>CC BY-NC-SA · BSD-3</td></tr>
+    <tr><td><b>Training</b></td><td>kohya-ss sd-scripts v0.12 · WD14 tagger v3</td><td>Apache-2.0</td></tr>
+    <tr><td><b>Video</b> <span class="muted">(next)</span></td><td>Wan 2.2 TI2V-5B / I2V-14B GGUF · RIFE</td><td>Apache-2.0 · MIT</td></tr>
+    <tr><td><b>Automation</b></td><td>Python · ComfyUI HTTP API · ffmpeg</td><td>MIT (this project)</td></tr>
+  </table>
+
+  <div class="kicker" style="margin-top:9mm">07 · Roadmap</div>
+  <h2 style="font-size:18pt">What's next</h2>
+  <div class="road">
+    <div class="col"><h3 style="color:var(--green)">Done</h3><ul><li>Hardware audit &amp; tuning</li><li>ComfyUI engine</li><li>Character, pose, sheet, background workflows</li><li>8 GB character LoRA training</li></ul></div>
+    <div class="col"><h3 style="color:#b08000">Next</h3><ul><li>Image → video (Wan 2.2 5B vs 14B)</li><li>First + last frame control</li><li>RIFE interpolation + upscale</li><li>Sword-draw action test shot</li></ul></div>
+    <div class="col"><h3 style="color:var(--violet)">Planned</h3><ul><li>LLM storyboard → shot list</li><li>Voices, music, SFX</li><li>Overnight batch renderer</li><li>15–20 s end-to-end scene</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:6mm"><h3>Responsible use</h3><p>Original characters only; no models that reproduce existing anime characters. Model licences are respected: FAIPL derivatives stay open, and the commercial-safe upscaler is used for monetised work. Voice cloning only with voices the author has rights to.</p></div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>7</span></div>
+</section>
+
+<!-- 8 · END -->
+<section class="page end">
+  <div class="strip"></div>
+  <div class="kicker">About</div>
+  <h2>Md Zahidul Haque</h2>
+  <p style="font-size:12pt;max-width:150mm;margin-top:3mm">AI &amp; Computer Engineering student at Tongmyong University, Busan. Builds end-to-end systems across AI pipelines, e-commerce and desktop apps.</p>
+  <div class="contact">
+    <div><span>Project</span>github.com/zahiddiff/anime-ai</div>
+    <div><span>GitHub</span>github.com/zahiddiff</div>
+    <div><span>Portfolio</span>zahiddiff.github.io</div>
+    <div><span>LinkedIn</span>linkedin.com/in/haquemdzahidul</div>
+  </div>
+  <div class="foot"><span>AnimeAI · Product overview</span><span>8</span></div>
+</section>
+
+</body>
+</html>

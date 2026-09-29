@@ -1,0 +1,10 @@
+{
+ "name": "Sumi",
+ "trigger": "sumi_ink",
+ "concept": "Exiled swordswoman who fights with living ink; quiet, blunt, protective. (Original character — concept B.)",
+ "identity": "1girl, solo, short hair, ash pink hair, bob cut, blunt bangs, green eyes, slender",
+ "outfit": "olive green bomber jacket, oversized jacket, cream ribbed cuffs, black turtleneck, black cargo pants, black boots, bandaged forearms, katana wrapped in white cloth",
+ "optional": "black ink splashes, ink aura",
+ "prune_tags_from_captions": ["ash pink hair", "pink hair", "short hair", "bob cut", "blunt bangs", "green eyes", "bangs"],
+ "seed": 20260929
+}
